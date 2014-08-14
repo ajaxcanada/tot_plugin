@@ -4,52 +4,52 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
-<script type="text/javascript">
-    $(document).ready(function(){
-       $('#double-scroll').doubleScroll();
-    });
-</script>
-
-<style>
-    #double-scroll{
-        width: 400px;
-    }
-</style>
-
-<div id="double-scroll">
-    <table id="very-wide-element">
-        <tbody>
-            <tr>
-                <td>AAAAAAAAA</td>
-                <td>BBBBBBBBB</td>
-                <td>CCCCCCCCC</td>
-                <td>DDDDDDDDD</td>
-                <td>EEEEEEEEE</td>
-                <td>FFFFFFFFF</td>
-                <td>GGGGGGGGG</td>
-                <td>HHHHHHHHH</td>
-            </tr>
-            <tr>
-                <td>AAAAAAAAA</td>
-                <td>BBBBBBBBB</td>
-                <td>CCCCCCCCC</td>
-                <td>DDDDDDDDD</td>
-                <td>EEEEEEEEE</td>
-                <td>FFFFFFFFF</td>
-                <td>GGGGGGGGG</td>
-                <td>HHHHHHHHH</td>
-            </tr>
-            <tr>
-                <td>AAAAAAAAA</td>
-                <td>BBBBBBBBB</td>
-                <td>CCCCCCCCC</td>
-                <td>DDDDDDDDD</td>
-                <td>EEEEEEEEE</td>
-                <td>FFFFFFFFF</td>
-                <td>GGGGGGGGG</td>
-                <td>HHHHHHHHH</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<html>
+    <body>
+        <div id='data_set'>
+            <div id='message'>Debug message=<br>Group Name=<br>Your record management area
+            </div>
+            <div id='TOT_NAV'><br>
+                <form name='navigation' method='POST'>
+                    <input type='hidden' name='navigation'>
+                    <input type="hidden" id="db_update_secure_nonce_field" name="db_update_secure_nonce_field" value="8695bae13f" />
+                    <input type="hidden" name="_wp_http_referer" value="/main/" />
+                    <input type='submit' name='navigator' value='user information'><br>
+                    <input type='submit' name='navigator' value='house information'><br>
+                    <input type='submit' name='navigator' value='house detail'><br>
+                    <input type='submit' name='navigator' value='reminder'><br>
+                </form>
+            </div>
+            <div id='TOT_MAIN_USER_FORM'>
+                <form name='main_form_data' method='POST'>
+                    <input type='hidden' name='main_form'>
+                    <input type="hidden" id="db_update_secure_nonce_field" name="db_update_secure_nonce_field" value="8695bae13f" />
+                    <input type="hidden" name="_wp_http_referer" value="/main/" />
+                    <div id='roz_0'>
+                        <input type='hidden' name='id' value='4'>
+                        <label for='user_id'>user_id</label>
+                        <input type='text' name='user_id' value='2'>
+                        <label for='reminder_date'>reminder_date</label>
+                        <input type='text' name='reminder_date' value='0000-00-00'>
+                        <label for='reminder_time'>reminder_time</label>
+                        <input type='text' name='reminder_time' value='00:00:00'>
+                        <label for='reminder_repeat'>reminder_repeat</label>
+                        <input type='text' name='reminder_repeat' value=''>
+                        <label for='reminder_message'>reminder_message</label>
+                        <input type='text' name='reminder_message' value=''>
+                        <label for='reminder_phone'>reminder_phone</label>
+                        <input type='text' name='reminder_phone' value=''>
+                        <input type='hidden' name='date_recorded' value='2014-08-13 18:19:07'> 
+                    </div> 
+                    <input type='submit' name='UPDATE_MAIN_RECORD' value='update record'>
+                    <input type='submit' name='DELETE_MAIN_RECORD' value='delete record'>
+                </form>
+            </div>
+            <div id='TOT_FOOTER'>
+                <div id='my_timer'>&nbsp;Elapsed time=0.0016450881958008
+                </div>
+            </div>
+        </div>
+            
+    </div> 
+</body></html> 

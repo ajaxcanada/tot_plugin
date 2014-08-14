@@ -7,42 +7,33 @@ add_action('init', 'process_post'); // This loads the function thats used to cap
 // PROCESS FIELDS FORMS AND GROUP FORMS
 
 
-function change_group($group_requested){
-    global $myMsg;
-    global $user_nav_selection;
-
-    $myMsg .= "function CHANGE_GROUP (".$group_requested.")";
-     $_SESSION["Group"] =  $group_requested;
-   
+function change_group($user_id, $group_requested){
+    global $wpdb;
+     //global $myMsg;
+    $db_table = $wpdb->prefix."tot_db_records";
+    //$myMsg .= "db (". $db_table. ") user id=(". $user_id. ") function CHANGE_GROUP (".$group_requested.")";
+    //$myMsg .= "<br>UPDATE $db_table SET group_selected = '$group_requested' WHERE user_id = '$user_id'" ;
+    $wpdb->query("UPDATE $db_table SET group_selected = '$group_requested' WHERE user_id = '$user_id'");
 }
         
 if(!function_exists('process_post')) {
 function process_post(){
     global $wpdb;
     global $myMsg;
-    global $data_group;
-    global $user_nav_selection;
     
     $form_nonce = filter_input(INPUT_POST, 'db_update_secure_nonce_field', FILTER_SANITIZE_STRING);
     $group_requested = filter_input(INPUT_POST, 'navigator', FILTER_SANITIZE_SPECIAL_CHARS);
+    $user_id = filter_input(INPUT_POST, 'user_id', FILTER_SANITIZE_NUMBER_INT);
     $update_main_form = filter_input(INPUT_POST, 'UPDATE_MAIN_RECORD', FILTER_SANITIZE_SPECIAL_CHARS);
-    
-    //$myMsg .= "fun ".$update_main_form;
-    //$form_name_field = filter_input(INPUT_POST, 'fields_form', FILTER_SANITIZE_SPECIAL_CHARS);
+
     if (! empty($form_nonce) && (wp_verify_nonce($form_nonce, 'db_update_nonce_field'))){
         if (isset( $group_requested )){
-            change_group($group_requested);
-        } 
-        if (isset( $update_main_form )){ 
+            $user_id = get_current_user_id();
+            change_group($user_id, $group_requested);
+        } if (isset( $update_main_form )){ 
             $myMsg .= " User SELECTED >".$update_main_form. "< ";
-            $myMsg .= " nav >".$_SESSION["Group"]. "< ";
-            // $current_user    
-        } 
-        //else {
-            // say nothing & do nothing
-        //}
-    }
-
+        }}
+ //========================= GOOD CODE ABOVE THIS LINE. LOL ============================================================
         // check the hidden field on each form to get form name. check security
 	// *************************************************************
 	if (isset( $_POST['fields_form'] ) && wp_verify_nonce($_POST['db_update_secure_nonce_field'], 'db_update_nonce_field') ){
@@ -63,7 +54,7 @@ function process_post(){
 	} elseif (isset( $_POST['navigator'] ) && wp_verify_nonce($_POST['db_update_secure_nonce_field'], 'db_update_nonce_field') ) {
 		
             // not used any more. 
-            $data_group = $_POST['navigator'];
+            //$data_group = $_POST['navigator'];
 		// user pressed a navigation button
 	}  elseif (isset( $_POST['record_field_form'] ) && wp_verify_nonce($_POST['db_update_secure_nonce_field'], 'db_update_nonce_field') ) {
 		$db_table = $wpdb->prefix."tot_db_records"; // set the table name to tot_db_groups

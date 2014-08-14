@@ -14,7 +14,7 @@ require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_process_forms.php";
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_main_form.php";
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_code_css.php";
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_sms_notifications.php";
-
+// ADDED FOR SMS CAPABILITY
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/twilio/Services/Twilio.php";
 
 // NOTE TO SELF. KEEP THIS REGISTER_ACTIVATION_HOOK's IN THE PRIMARY FILE. 

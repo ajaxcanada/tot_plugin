@@ -58,7 +58,7 @@ only screen and (max-width: 760px),
 
 #DIV_ROW {
    height: 22px;
-   font-size: 2em;
+   font-size: 1em;
    margin: 1px;
 }
 
@@ -85,31 +85,6 @@ tr{
 }
 
 
-#it {
-   //border:1px black; 
-   //height: 10px;
-   color: #ccc;
-   font-size: 1em;  
-   //overflow: hidden;
-}
-
-#main_table {
-    border-collapse:collapse;
-    
-    
-    
-}
-
-
-spare {
-border:2px solid black;
-    border-radius:0px;
-    -moz-border-radius:0px;
-    -webkit-border-radius:0px;
-}
-
-
-
 .body{
 	margin: 0 auto;  	width:70%;       font-family: verdana;
 }
@@ -129,7 +104,7 @@ a:hover, a:active {
 #navigation {
    width:98%;  height: 45px;  padding-top: 0px; }
 
-#TOT_NAV{ font-size: .75em;
+#TOT_NAV{ font-size: .85em;
     float: left;     width: 10%; 	min-width: 150px; 	min-height: 100px;     
     margin-bottom: 10px;
     padding-left: 5px ;
@@ -137,17 +112,19 @@ a:hover, a:active {
     background-color: #ffffff; }
 
 #TOT_MAIN_USER_FORM{
-    font-size: .75em;
     float: left;      	width: 75%;      min-height: 100px;
     margin-left: 30px;     margin-bottom: 10px;
     padding-left: 38px; 	padding-top: 10px;
-    border-style: solid;  	border-width: 2px;  	border-color: #000000;
+    border-style: solid;  	border-width: 1px;  	border-color: #000000;
     background-color: #ffffff;
+    overflow-x: scroll; 
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 #TOT_FOOTER{font-size: .75em;
 	float: bottom; 	clear: both; 	height: 30px;  	width: 97%;
-	font-size: .65em;    padding-left: 10px;  padding-top: 1px;
+	padding-left: 10px;  padding-top: 1px;
 	border-style: solid; 	border-width: 0px; 	border-color: #ffffff; 
     border-bottom-left-radius: 5px;     border-bottom-right-radius: 5px;
 }
@@ -169,10 +146,10 @@ a:hover, a:active {
 	display:inline-block;
 	cursor:pointer;
 	color: #ffffff;
-	font-family:Trebuchet MS;
-	font-size:12px;
+/*	font-family:Trebuchet MS;*/
+	font-size: .75em;
 	font-weight:bold;
-	padding:1px 10px;
+	padding:1px 2px;
 	/* text-decoration:none; */
 }
 .myButton:hover {
@@ -257,7 +234,9 @@ div.col {
 	border-style:solid;
 	border-color: #000000;
 }
-
+#roz{
+    font-size: 1em;
+}
 hr { display: block; height: 1px;
     border: 0; border-top: 1px solid #ccc;
     margin: 1em 0; padding: 0; }
@@ -276,11 +255,12 @@ input[type=button], input[type=text]
 {
     border-radius: 5px;
     font-family: verdana;
-	font-size: .65em;
+	font-size: 1em;
 }
 input[type=submit] {
-	font-size: 1em;
-	padding: 5px 15px; 
+	font-size: .75em;
+	padding: 5px 15px;
+        margin: 5px;
 	background:#000; 
 	border:0 none;
         font-family: verdana;

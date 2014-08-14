@@ -42,18 +42,24 @@ function install_plugin_create_records_table(){
 	// create the tot fields database table
 	if($wpdb->get_var("show tables like '$db_records_table'") != $db_records_table) 
 	{
-		$sql = "CREATE TABLE " . $db_records_table . " (
-		`id` int(3) NOT NULL AUTO_INCREMENT,
-		`user_name` varchar(64) NOT NULL,
-		`data_name` varchar(64) NOT NULL,
-		`data_type` varchar(64) NOT NULL,
-		`data_value` text NULL,
-		`date_recorded` timestamp NOT NULL,
-		UNIQUE KEY id (id)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
- 
-		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-		dbDelta($sql);
+            $sql = "CREATE TABLE " . $db_records_table . " (
+            `id`                int(3)      NOT NULL AUTO_INCREMENT,
+            `date_recorded`     timestamp   NOT NULL,
+            `date_modified`     datetime    NOT NULL,
+            `user_id`           varchar(32) NOT NULL,
+            `group_selected`    varchar(32) NOT NULL,
+            `house_address`     varchar(32) NULL,
+            `house_name`        varchar(32) NULL,
+            `reminder_date`     date        NOT NULL,
+            `reminder_time`     time        NOT NULL,
+            `reminder_repeat`   varchar(32) NULL,
+            `reminder_message`  varchar(32) NULL,
+            `reminder_phone`    varchar(32) NULL,
+            UNIQUE KEY id (id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+
+            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+            dbDelta($sql);
 	}
 }
 
@@ -76,33 +82,38 @@ function install_plugin_create_groups_table(){
 	}
 }
 
+// LOAD THE DEFAILT DATA INTO THE TABLES
 function insert_data() {
-   global $wpdb;
+    // FIELDS
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'group_selected', 'field_title' => 'group selected', 'field_group' => 'user information'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'house_name', 'field_title' => 'House Name', 'field_help' => "House Name",  'field_group' => 'house information'  ) );
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'house_address',  'field_title' => 'House Address', 'field_help' => "House Address", 'field_group' => 'house information' ) );
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_date', 'field_title' => 'reminder date', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_time', 'field_title' => 'reminder time', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_repeat', 'field_title' => 'reminder repeat', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_message', 'field_title' => 'reminder message', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_phone', 'field_title' => 'reminder phone', 'field_group' => 'reminder'));
+    // RECORDS
+    load_table_w_array('tot_db_records', array('group_selected'=>'user information'));
+    // GROUPS
+     load_table_w_array('tot_db_groups', array('group_name'=>'user information'));
+    load_table_w_array('tot_db_groups', array('group_name'=>'house information'));
+    load_table_w_array('tot_db_groups', array('group_name'=>'house detail'));
+    load_table_w_array('tot_db_groups', array('group_name'=>'reminder'));
+}		
 
-   // add record to the fields table
-   $rows_affected = $wpdb->insert( ($wpdb->prefix . "tot_db_fields"), 
-   array('field_name' => 'house_name', 
-   'field_title' => 'House Name', 
-   'field_help' => "Enter a name for this house" ) );
-
-   // add record to the fields table
-   $rows_affected = $wpdb->insert( ($wpdb->prefix . "tot_db_fields"), 
-   array('field_name' => 'house_address', 
-   'field_title' => 'House Address', 
-   'field_help' => "Enter the address for this house" ) );
-
-   // add record to the groups table
-   $rows_affected = $wpdb->insert( $wpdb->prefix . "tot_db_groups", array('group_name' => 'house description' ) );
-   $rows_affected = $wpdb->insert( $wpdb->prefix . "tot_db_groups", array('group_name' => 'house detail' ) );
-   
-   // add records to the records table
-   $rows_affected = $wpdb->insert( ($wpdb->prefix . "tot_db_records"), array(
-   'data_name' => 'house_name', 
-   'data_type' => 'data_type', 
-   'data_value' => 'data value' 
-   ) );   }
-   
-   
+function load_table_w_array($db, $array ){
+    global $wpdb;
+    $wpdb->insert( ($wpdb->prefix . $db), $array ); 
+    }   
    
 function db_uninstall(){
 	global $wpdb;
