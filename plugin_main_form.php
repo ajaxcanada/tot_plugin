@@ -1,37 +1,30 @@
 <?php
-// *************************************************************
-// HIDE THE HEADER AND TITLE OFF THE PAGE
-function hide_header_on_this_page(){
-    $css_out .= "<style>";
-    $css_out .= "#header {display: none; }";
-    $css_out .= ".entry-title {display: none;}";
-    $css_out .= "</style>";
-    return $css_out;
-}
 
 // *************************************************************
 // CREATE THE MAIN FORM HERE
 
 if(!function_exists(view_user_main_form)) {
 function view_user_main_form(){
-    //global $user_nav_selection;
+    $unregistered_user_welcome_message = "This is a members only page, so you need to be logged in to access it!";
+    $unregistered_user_welcome_message .= "<br>REGISTER or SIGN-IN to gain access to all your cool stuff";
+    $unregistered_user_welcome_message .= "<br>Have a great day!";
+
     $start = microtime(TRUE);  // starts a microtimer called start
     // SET THE DEAFULT NAVIGATION PAGE
-    $out .= hide_header_on_this_page();
-    $out .= Create_main_styles();
+    hide_header_on_this_page();
     $current_user_id = check_user_id();
 
     $out .= "<html><body>"; // start of the html
     $out .= "<div id='data_set'>"; // DIV_PAGE ==================================
     if ($current_user_id == "") {
-        echo "you need to be logged in!". $current_user_id;
+        echo $unregistered_user_welcome_message. $current_user_id;
         exit;
     } else {
         $group = check_user_last_access($current_user_id);
     
         $out .= create_message_area(); // MESSAGE DIV CODE
         $out .= create_navigation(); // NAVIGATION DIV CODE
-        $out .= create_main_area($group); // MAIN DIV CODE
+        $out .= create_main_area($current_user_id, $group); // MAIN DIV CODE
         $out .= create_main_footer($start); // FOOTER CODE
     }	
     $out .= "</div> ";	// </ END OF MAIN FORM DIV
@@ -39,48 +32,74 @@ function view_user_main_form(){
     return $out;
     }
 }
-
-// *************************************************************
-// CREATE THE MAIN FORM HERE
-function create_main_area($user_nav_selection){
+        
+// LOAD THE FIELDS TITLES INFO FOR THE GROUP REQUESTED BY THE USER
+function load_the_group_names($user_group_selected){
     global $wpdb;  // wordpress database connection
     
     // FIRST LOAD THE FIELD TABLE BASED ON THE USER SELECTION OR DEFAULT
-    $db_fields = $wpdb->prefix."tot_db_fields"; // load fields records
-    $query_fields = "SELECT `field_name` FROM {$db_fields} where field_group = '".$user_nav_selection."'"; //fields string to pass to mysql query
+    $db_fields = $wpdb->prefix."tot_db_fields"; 
+    $query_field_titles = "SELECT field_title FROM {$db_fields} where field_group = '".$user_group_selected."'"; 
+    $field_titles= mysql_query($query_field_titles) or die(mysql_error());// get fields from database
+
+    //$db_field_name .= "`id`, `user id`, ";
+     while($fieldrow = mysql_fetch_assoc($field_titles)){  // load the group_rows of fields data 
+        foreach($fieldrow as $field_name => $field_value){
+            $db_field_name .= "<input type='text' style='color: #000;' readonly name='' value='$field_value'>";
+            
+        }}
+    //$db_field_name .= "`date recorded`";
+    return $db_field_name;
+}
+
+// LOAD THE FIELDS TABLE INFO FOR THE GROUP REQUESTED BY THE USER
+function load_the_group_data($user_group_selected){
+    global $wpdb;  // wordpress database connection
+    
+    // FIRST LOAD THE FIELD TABLE BASED ON THE USER SELECTION OR DEFAULT
+    $db_fields = $wpdb->prefix."tot_db_fields"; 
+    
+    $query_fields = "SELECT field_name FROM {$db_fields} where field_group = '".$user_group_selected."'"; 
     $fields_results= mysql_query($query_fields) or die(mysql_error());// get fields from database
 
-    $num_cols = mysql_num_fields($fields_results);
-    $num_rows = mysql_num_rows($fields_results);
+    $num_cols = mysql_num_fields($fields_results);  
+    $num_rows = mysql_num_rows($fields_results);     
     $values = array();
 
     // INIT ARRAY
-    for ($c=1;$c<=$num_cols;$c++) { for ($r=1;$r<=$num_rows;$r++) { $values['col_'.$c][$r] = array(); }}
-    $c = 1;  $r = 1; // INIT VARIABLES
+    for ($c=1;$c<=$num_cols;$c++) { for ($r=1;$r<=$num_rows;$r++) { $values['col_'.$c][$r] = array();$headers['col_'.$c][1] = array(); }}
+    // INIT VARIABLES
+    $c = 1;  $r = 1; 
     // LOAD THE FIELDNAMES INTO THE ARRAY
     while($fieldrow = mysql_fetch_assoc($fields_results)){  // load the group_rows of fields data 
         $c=1; // reset back to column 1
         foreach($fieldrow as $field_name => $field_value){
-            $values['col'.$c][$r] = $field_value;
-            $c++;
-        }
-        $r++;
+            $values['col'.$c][$r] = $field_value;  $c++;}
+        $r++; 
     }
-
-    // USE THE ARRAY DATA TO CREATE A SEARCH STRING
+    //ADD ID AND USER_ID FIELDS TO THE SEARCH STRING
     $db_fields_names .= "`id`, `user_id`, ";
+    // USE THE ARRAY DATA TO CREATE A SEARCH STRING
     for ($r=1;$r<=$num_rows;$r++) { 
-	for ($c=1;$c<=$num_cols;$c++) {
-            $db_fields_names .= "`" . $values['col'.$c][$r] . "`, "; 
-        }
+	for ($c=1;$c<=$num_cols;$c++) { $db_fields_names .= "`" . $values['col'.$c][$r] . "`, "; }
     }
-
-    // add id, username, date_recorded (add modified) this onto the end of the array    
+    // ADD date_created AND date_modified ONTO THE END OF THE STRING
     $db_fields_names .= "`date_recorded`";
-    // send the field name out for debug
+    return $db_fields_names;
+}
+
+
+
+// *************************************************************
+// CREATE THE MAIN FORM HERE
+function create_main_area($user_id,$user_group_selected){
+    global $wpdb;  // wordpress database connection
+    // GET THE FIELD NAMES FOR THE GROUP THE USER SELECTED
+    $titles = load_the_group_names($user_group_selected);
+    $db_fields_names = load_the_group_data($user_group_selected);
 
     $db_records = $wpdb->prefix."tot_db_records"; // load db records
-    $query_records = "SELECT ". $db_fields_names ." FROM {$db_records}"; // records string to pass to mysql query
+    $query_records = "SELECT ". $db_fields_names ." FROM {$db_records} WHERE user_id={$user_id}"; // records string to pass to mysql query
     $records_results= mysql_query($query_records) or die(mysql_error()); // get records from database
 
     // DIV_MAIN_FORM ============================
@@ -94,16 +113,17 @@ function create_main_area($user_nav_selection){
   
     // OUTPUT THE DATA ==========================
     $r_count = 0;
+    $out .= $titles;
     while($row = mysql_fetch_assoc($records_results)){  // load the group_rows of fields data 
         $out .= "<div id='roz'>"; //_" . $r_count++."'>" ;
         foreach($row as $fieldname => $fieldvalue){
             switch($fieldname){
                 case 'id':
-                //case 'user_name':
+                case 'user_id':
                 case 'date_recorded':
                     $out .= "<input type='hidden' name='$fieldname' value='$fieldvalue'>"; break;
                 default:
-                    $out .= "<label for='$fieldname'>$fieldname</label>";
+                    //$out .= "<label for='$fieldname'>$fieldname</label>";
                     $out .= "<input type='text' name='$fieldname' value='$fieldvalue'>"; // capture the new record name
             }
         // $out .=  $fieldvalue ; // output column to screen
@@ -124,11 +144,11 @@ return $out;
 // USER MESSAGE AREA
 function create_message_area(){
 	global $myMsg;
-//        global $user_nav_selection;
+//        global $user_group_selected;
         // DIV_MY_MESSAGE ============================
 	$out .= "<div id='message'>";
-	$out .= "Debug message=" . $myMsg ."<br>";
-	$out .= "Group Name=" .  $_SESSION["Group"] ."<br>";
+        if(isset($myMsg)){$out .= "Debug message=" . $myMsg ."<br>";}
+        
 	$out .= "Your record management area"; 
 	$out .= "</div>"; 
 	// end DIV_MY_MESSAGE
