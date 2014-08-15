@@ -2,22 +2,28 @@
 
 // *************************************************************
 // CREATE THE MAIN FORM HERE
-
 if(!function_exists(view_user_main_form)) {
 function view_user_main_form(){
-    $unregistered_user_welcome_message = "This is a members only page, so you need to be logged in to access it!";
-    $unregistered_user_welcome_message .= "<br>REGISTER or SIGN-IN to gain access to all your cool stuff";
+    $unregistered_user_welcome_message .= "Welcome to ToolsOnTools.com<br>";
+    $unregistered_user_welcome_message .= "This is a members only page so you need to be logged in to access it!";
+    $unregistered_user_welcome_message .= '<br><a href="' . wp_registration_url() . '" title="' . __('Register') . '">' . __('REGISTER') . '</a>';
+    $unregistered_user_welcome_message .= ' or <a href="'. site_url('wp-login.php') .'">LOG IN</a>';
+    $unregistered_user_welcome_message .= " to gain access to all your cool stuff<br>";
     $unregistered_user_welcome_message .= "<br>Have a great day!";
 
     $start = microtime(TRUE);  // starts a microtimer called start
     // SET THE DEAFULT NAVIGATION PAGE
     hide_header_on_this_page();
-    $current_user_id = check_user_id();
-
+    //$update_menu = check_user_id();
+    $current_user_id = get_current_user_id();
+    
     $out .= "<html><body>"; // start of the html
     $out .= "<div id='data_set'>"; // DIV_PAGE ==================================
+    
     if ($current_user_id == "") {
-        echo $unregistered_user_welcome_message. $current_user_id;
+        echo $unregistered_user_welcome_message; //. $current_user_id;
+        //$items .= '<li><a href="'. site_url('wp-login.php') .'">Log In</a></li>';
+        //$items .= '<li><a href="' . wp_registration_url() . '" title="' . __('Register') . '">' . __('Register') . '</a>';
         exit;
     } else {
         $group = check_user_last_access($current_user_id);

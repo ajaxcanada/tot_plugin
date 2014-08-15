@@ -40,8 +40,8 @@ function db_css_includes(){ // included for styling
 add_action('wp_head', 'db_css_includes'); //activates the style.css
 
 
-// added this for login/logout
-add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+// ADDED LOGIN/LOGOUT
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 3 );
 
 function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->theme_location == 'primary-menu') {
@@ -49,6 +49,7 @@ function add_loginout_link( $items, $args ) {
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary-menu') {
         $items .= '<li><a href="'. site_url('wp-login.php') .'">Log In</a></li>';
+        $items .= '<li><a href="' . wp_registration_url() . '" title="' . __('Register') . '">' . __('Register') . '</a>';
     }
     return $items;
 }
