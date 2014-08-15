@@ -23,9 +23,10 @@ function install_plugin_create_fields_table() {
         `field_values` varchar(32),
         `field_element` varchar(32),
         `field_validation` varchar(32),
-        `field_cb_required` varchar(32),
-        `field_cb_sortable` varchar(32),
-        `field_cb_readonly` varchar(32),
+        `field_visible` int(3) DEFAULT '1' NOT NULL, 
+        `field_cb_required` int(3),
+        `field_cb_sortable` int(3),
+        `field_cb_readonly` int(3),
         UNIQUE KEY id (id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
@@ -49,6 +50,9 @@ function install_plugin_create_records_table(){
             `user_id`           varchar(32) NOT NULL,
             `group_selected`    varchar(32) NOT NULL,
             `house_address`     varchar(32) NULL,
+            `user_address`      varchar(32) NULL,
+            `user_gender`       varchar(32) NULL,
+            `user_birthday`     date        NULL,
             `house_name`        varchar(32) NULL,
             `reminder_date`     date        NOT NULL,
             `reminder_time`     time        NOT NULL,
@@ -84,31 +88,50 @@ function install_plugin_create_groups_table(){
 
 // LOAD THE DEFAILT DATA INTO THE TABLES
 function insert_data() {
+insert_fields_data();
+insert_records_data();
+insert_groups_data();
+
+}		
+
+function insert_fields_data() {
     // FIELDS
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'group_selected', 'field_title' => 'group selected', 'field_group' => 'user information'));
+        array('field_name' => 'group_selected', 'field_title' => 'group selected', 'field_group' => 'user information', 'field_visible'=>'0'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'house_name', 'field_title' => 'House Name', 'field_help' => "House Name",  'field_group' => 'house information'  ) );
+        array('field_name' => 'user_address', 'field_title' => 'Users Address', 'field_group' => 'user information'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'house_address',  'field_title' => 'House Address', 'field_help' => "House Address", 'field_group' => 'house information' ) );
+        array('field_name' => 'user_birthday', 'field_title' => 'Users Birthday', 'field_group' => 'user information'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'reminder_date', 'field_title' => 'reminder date', 'field_group' => 'reminder'));
+        array('field_name' => 'user_gender', 'field_title' => 'Users Gender', 'field_group' => 'user information'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'reminder_time', 'field_title' => 'reminder time', 'field_group' => 'reminder'));
+        array('field_name' => 'house_name', 'field_title' => 'House Name', 'field_help' => "House Name",  'field_group' => 'house information'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'reminder_repeat', 'field_title' => 'reminder repeat', 'field_group' => 'reminder'));
+        array('field_name' => 'house_address',  'field_title' => 'House Address', 'field_help' => "House Address", 'field_group' => 'house information'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'reminder_message', 'field_title' => 'reminder message', 'field_group' => 'reminder'));
+        array('field_name' => 'reminder_date', 'field_title' => 'Reminder Date', 'field_group' => 'reminder'));
     load_table_w_array('tot_db_fields', 
-        array('field_name' => 'reminder_phone', 'field_title' => 'reminder phone', 'field_group' => 'reminder'));
-    // RECORDS
+        array('field_name' => 'reminder_time', 'field_title' => 'Reminder Time', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_repeat', 'field_title' => 'Reminder Repeat', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_message', 'field_title' => 'Reminder Message', 'field_group' => 'reminder'));
+    load_table_w_array('tot_db_fields', 
+        array('field_name' => 'reminder_phone', 'field_title' => 'Reminder Phone', 'field_group' => 'reminder'));
+}
+
+function insert_records_data() {
+   // RECORDS
     load_table_w_array('tot_db_records', array('group_selected'=>'user information'));
-    // GROUPS
-     load_table_w_array('tot_db_groups', array('group_name'=>'user information'));
+}
+
+function insert_groups_data() {
+   // GROUPS
+    load_table_w_array('tot_db_groups', array('group_name'=>'user information'));
     load_table_w_array('tot_db_groups', array('group_name'=>'house information'));
     load_table_w_array('tot_db_groups', array('group_name'=>'house detail'));
     load_table_w_array('tot_db_groups', array('group_name'=>'reminder'));
-}		
+}
 
 function load_table_w_array($db, $array ){
     global $wpdb;
