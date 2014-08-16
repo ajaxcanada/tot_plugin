@@ -1,42 +1,38 @@
 /* 
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-/* hide title off record page */
-.post-1282 .entry-title {display: none;}
-//.post-1282 
-
-
+and also iPads specifically. */
 /* ================================== */
 /* This is the smaller screen sizes CSS */
 /* ================================== */
 @media 
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
-.body{
-	
-	}
+    .body{
 
-#wrapper {
-     width: 100%;      margin: 0 auto; 
-}
+    }
 
-#TOT_NAV{
-    float: left;  width: 95%; 	min-width: 95%;     min-height: 200px;
-	padding-bottom: 2px;	padding-left: 0px;
-}
+    #wrapper {
+        width: 100%;      margin: 0 auto; 
+    }
 
-#TOT_MAIN_USER_FORM{
- 	float: left;    min-width: 95%;     min-height: 200px;
-	padding-bottom: 2px; 	padding-left: 0px;
-}
+    #TOT_NAV{
+        float: left;  width: 95%; 	min-width: 95%;     min-height: 200px;
+        padding-bottom: 2px;	padding-left: 0px;
+    }
 
-#TOT_FOOTER{
-	float: bottom; 	clear: both;   min-width: 95%;	  height: 30px;    
-	padding-left: 0px;    padding-bottom: 2px;
-    
-}}
+    #TOT_MAIN_USER_FORM{
+        float: left;    
+/*        min-width: 95%;     */
+/*        min-height: 200px;*/
+        padding-bottom: 2px; 	padding-left: 0px;
+    }
+
+    #TOT_FOOTER{
+        float: bottom; 	clear: both;   min-width: 95%;	  height: 30px;    
+        padding-left: 0px;    padding-bottom: 2px;
+
+    }}
 
 
 
@@ -49,20 +45,20 @@ only screen and (max-width: 760px),
     overflow-x: scroll; 
     overflow-y: hidden;
     white-space: nowrap;
-    
-/*    border:1px solid black; 
-    border-radius:0px;*/
+
+    /*    border:1px solid black; 
+        border-radius:0px;*/
 }
 
 #DIV_ROW {
-   height: 22px;
-   font-size: 1em;
-   margin: 1px;
+    height: 22px;
+    font-size: 1em;
+    margin: 1px;
 }
 
 #DIV_ROW input {
-/*   color: #000;*/
-    
+    /*   color: #000;*/
+
 }
 
 
@@ -72,10 +68,10 @@ th, td {
     padding: 0;
     margin: 0;
     border-collapse: collapse;
-/*    border:1px solid black; 
-    border-radius:0px;
-    -moz-border-radius:0px;
-    -webkit-border-radius:0px;*/
+    /*    border:1px solid black; 
+        border-radius:0px;
+        -moz-border-radius:0px;
+        -webkit-border-radius:0px;*/
 }
 
 tr{
@@ -84,83 +80,90 @@ tr{
 
 
 .body{
-	margin: 0 auto;  	width:70%;       font-family: verdana;
+    margin: 0 auto;  	width:100%;       font-family: verdana;
 }
-a {  
-	color: #ffffff;
-	/* text-decorations: none; */
+/*a {  
+    color: #ffffff;
+    text-decorations: none; 
 }
 
 a:link, a:visited {
-	color: #fff;
+    color: #fff;
 
 }
 
 a:hover, a:active {
-}
+}*/
 
-#navigation {
-   width:98%;  height: 45px;  padding-top: 0px; }
+/*#navigation {
+    width:98%;  height: 45px;  padding-top: 0px; }*/
 
-#TOT_NAV{ font-size: .85em;
-    float: left;     width: 10%; 	min-width: 150px; 	min-height: 100px;     
-    margin-bottom: 10px;
-    padding-left: 5px ;
-    border-style: solid;  border-width: 0px;  	
-    background-color: #ffffff; }
+#TOT_NAV{ font-size: .95em;
+          float: left;     width: 10%; 	min-width: 150px; 	min-height: 100px;     
+          margin-bottom: 10px;
+          padding-left: 5px ;
+          border-style: solid;  border-width: 0px;  	
+          background-color: #ffffff; }
 
 #TOT_MAIN_USER_FORM{
     float: left;      	width: 75%;      min-height: 100px;
     margin-left: 30px;     margin-bottom: 10px;
     padding-left: 38px; 	padding-top: 10px;
-    border-style: solid;  	border-width: 1px;  	border-color: #000000;
-    background-color: #ffffff;
-    overflow-x: scroll; 
-    overflow-y: hidden;
+    border-style: solid;  	border-width: 1px;  	border-color: #fff;
+    background-color: #fff;
+    overflow-x: auto; 
+    overflow-y: auto;
     white-space: nowrap;
 }
 
 #TOT_FOOTER{font-size: .75em;
-	float: bottom; 	clear: both; 	height: 30px;  	width: 97%;
-	padding-left: 10px;  padding-top: 1px;
-	border-style: solid; 	border-width: 0px; 	border-color: #ffffff; 
-    border-bottom-left-radius: 5px;     border-bottom-right-radius: 5px;
+            float: bottom; 	clear: both; 	height: 30px;  	width: 97%;
+            padding-left: 10px;  padding-top: 1px;
+            border-style: solid; 	border-width: 0px; 	border-color: #ffffff; 
+            border-bottom-left-radius: 5px;     border-bottom-right-radius: 5px;
 }
 
 #send_SMS{
-	font-size: .75em; 
-	border-style: solid;  	border-width: 1px;  	border-color: #000000;
-	margin-bottom: 10px; 
-        display:none;
+    font-size: .75em; 
+    border-style: solid;  	border-width: 1px;  	border-color: #000000;
+    margin-bottom: 10px; 
+    display:none;
 }
 
 
 .myButton {
-	margin-bottom: 2px;
-	background-color:#000000;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-	display:inline-block;
-	cursor:pointer;
-	color: #ffffff;
-/*	font-family:Trebuchet MS;*/
-	font-size: .75em;
-	font-weight:bold;
-	padding:1px 2px;
-	/* text-decoration:none; */
+    margin-bottom: 2px;
+    background-color:#000000;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    display:inline-block;
+    cursor:pointer;
+    color: #ffffff;
+    /*	font-family:Trebuchet MS;*/
+    font-size: .8em;
+    font-weight:bold;
+    padding:1px 2px;
+    /* text-decoration:none; */
 }
 .myButton:hover {
-	background-color:#ffffff; 
-	color:#000000; 
-	border-color: #000;
-	border-style: solid; 	border-width: 1px;
+    background-color:#ffffff; 
+    color:#000000; 
+    border-color: #000;
+    border-style: solid; 	border-width: 1px;
 }
 .myButton:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
 }
 
+#new_style{
+    color: #000;
+    /*	font-family:Trebuchet MS;*/
+    font-size: .5em;
+    font-weight:bold;
+    
+}
 div.bottom {
     height: 200px;
     width: 80%;
@@ -179,73 +182,83 @@ div.col {
     float: left;
     width: 33%;
 }
+#data_set{
+    font-size: .9em;
+    font-weight:bold;
+    color: #000000;
+    padding:5px 10px; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
+   
+}
 #new_record_entry{
-	//width:500px;
-	font-size: .8em;
-	font-weight:bold;
-	color: #000000;
-	padding:5px 10px; 
-	border-style: solid;
-	border-width: 1px;
-	border-color: #000000;
-	background-color: #E6E6E6;
-	-webkit-border-radius: 5px;
-	border-radius: 5px; 
+    //width:500px;
+    font-size: .8em;
+    font-weight:bold;
+    color: #000000;
+    padding:5px 10px; 
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000;
+    background-color: #E6E6E6;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
 
 }
 #message{
 }
 #footer_info{
-	font-size: .75em;
-	padding:1px 5px; 
-	border-style: solid;
-	border-width: 4px;
-	border-color:  #000000;
-	color: #000000;
-	-webkit-border-radius: 5px;
-	border-radius: 5px; 
+    font-size: .75em;
+    padding:1px 5px; 
+    border-style: solid;
+    border-width: 4px;
+    border-color:  #000000;
+    color: #000000;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
 }
 #db_row{
-	//background-color: #fffccc;
-	//border: 10px black;
-	//border: 1px dashed #FADFAD;
-	//color: black;
-	//color: #B4357;
-	//font-weight:bold;
-	
-	padding:3px 5px; 
-	font-size: 0.7em;
-	border-radius: 2px;
-        padding: 0px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px; 
+    //background-color: #fffccc;
+    //border: 10px black;
+    //border: 1px dashed #FADFAD;
+    //color: black;
+    //color: #B4357;
+    //font-weight:bold;
+
+    padding:3px 5px; 
+    font-size: 0.7em;
+    border-radius: 2px;
+    padding: 0px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
 }
 #db_row:nth-child(even) {
-	background: #d2e4fc;
-	//border-width:1px;	
-	//border-style:solid;
-	//border-color: #000000;
+    background: #d2e4fc;
+    //border-width:1px;	
+    //border-style:solid;
+    //border-color: #000000;
 }
 #db_row:nth-child(odd) {
-	//background: #cdd7b6;
-	border-width:1px;	
-	border-style:solid;
-	border-color: #000000;
+    //background: #cdd7b6;
+    border-width:1px;	
+    border-style:solid;
+    border-color: #000000;
 }
 #roz{
     font-size: 1em;
 }
 hr { display: block; height: 1px;
-    border: 0; border-top: 1px solid #ccc;
-    margin: 1em 0; padding: 0; }
+     border: 0; border-top: 1px solid #ccc;
+     margin: 1em 0; padding: 0; }
 
 #existing_record_group {
     padding: 5px;
-	line-height: 2;
-	height: 30px;
-	border-radius: 5px;
+    line-height: 2;
+    height: 30px;
+    border-radius: 5px;
     font-family: verdana;
-	font-size: 1em;
+    font-size: 1em;
 }
 
 
@@ -253,18 +266,18 @@ input[type=button], input[type=text]
 {
     border-radius: 5px;
     font-family: verdana;
-	font-size: 1em;
+    font-size: 1em;
 }
 input[type=submit] {
-	font-size: .75em;
-	padding: 5px 15px;
-        margin: 5px;
-	background:#000; 
-	border:0 none;
-        font-family: verdana;
-	cursor:pointer;
-	-webkit-border-radius: 5px;
-	border-radius: 5px; 
+    font-size: .75em;
+    padding: 5px 15px;
+    margin: 5px;
+    background:#000; 
+    border:0 none;
+    font-family: verdana;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
 }
 
 

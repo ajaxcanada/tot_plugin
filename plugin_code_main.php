@@ -16,6 +16,8 @@ require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_code_css.php";
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_sms_notifications.php";
 // ADDED FOR SMS CAPABILITY
 require WP_CONTENT_DIR."/plugins/tot_plugin_files/twilio/Services/Twilio.php";
+// ADDED FOR DEFINES AND LANGUAGE
+require WP_CONTENT_DIR."/plugins/tot_plugin_files/plugin_defines.php";
 
 // NOTE TO SELF. KEEP THIS REGISTER_ACTIVATION_HOOK's IN THE PRIMARY FILE. 
 // THEY DONT WORK IN AN INCLUDED FILE. WELCOME TO PWRDPRESS :)

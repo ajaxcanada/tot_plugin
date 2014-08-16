@@ -2,10 +2,15 @@
 // *************************************************************
 // create the record cell with fields table atributes
 // *************************************************************
-
 if(!function_exists(record_form)) {
 function record_form(){
+
     $start = microtime(TRUE);  // starts a microtimer called start
+    // SET THE DEAFULT NAVIGATION PAGE
+    //hide_header_on_this_page();
+    
+    check_user_id();
+    
     global $wpdb;  // wordpress database connection
     global $myMsg;	// messages used by TOT. these are at the top of the page. 
     //$db_records = $wpdb->prefix."tot_db_records"; // load db records
@@ -25,7 +30,7 @@ function record_form(){
 
     $out .= "<html><body>"; // start of the html
     // javascript to update fields from selection
-    $out .= hide_header_on_this_page();
+    //$out .= hide_header_on_this_page();
     $out .= "<div id='data_set'>"; // D I V 1 - the entire form so we can easily add style scroll
     $out .= "<div id='message'>"; // START OF MESSAGE_DIV
     $out .= $myMsg ."<br>To add a new record. enter the new record information, then press ADD NEW COLUMN"; 
